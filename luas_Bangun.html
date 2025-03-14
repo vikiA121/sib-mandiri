@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Kalkulator Luas Bangun Datar</title>
+</head>
+<body>
+    <h1>Kalkulator Luas Bangun Datar</h1>
+    
+    <h2>Persegi Panjang</h2>
+    <label>Panjang: <input type="number" id="panjang"></label><br>
+    <label>Lebar: <input type="number" id="lebar"></label><br>
+    <button onclick="hitungLuasPersegiPanjang()">Hitung</button>
+    <p id="hasilPersegiPanjang"></p>
+    
+    <h2>Bujur Sangkar</h2>
+    <label>Sisi: <input type="number" id="sisi"></label><br>
+    <button onclick="hitungLuasBujurSangkar()">Hitung</button>
+    <p id="hasilBujurSangkar"></p>
+    
+    <h2>Segitiga</h2>
+    <label>Alas: <input type="number" id="alas"></label><br>
+    <label>Tinggi: <input type="number" id="tinggi"></label><br>
+    <button onclick="hitungLuasSegitiga()">Hitung</button>
+    <p id="hasilSegitiga"></p>
+    
+    <script>
+        // Fungsi untuk menghitung luas persegi panjang
+        function hitungLuasPersegiPanjang() {
+            // Mengambil nilai input
+            var panjang = document.getElementById("panjang").value;
+            var lebar = document.getElementById("lebar").value;
+            
+            // Menghitung luas
+            var luas = panjang * lebar;
+            
+            // Menampilkan hasil
+            document.getElementById("hasilPersegiPanjang").innerHTML = "Luas persegi panjang: " + luas;
+        }
+        
+        // Fungsi untuk menghitung luas bujur sangkar
+        function hitungLuasBujurSangkar() {
+            // Mengambil nilai input
+            var sisi = document.getElementById("sisi").value;
+            
+            // Menghitung luas
+            var luas = sisi * sisi;
+            
+            // Menampilkan hasil
+            document.getElementById("hasilBujurSangkar").innerHTML = "Luas bujur sangkar: " + luas;
+        }
+        
+        // Fungsi untuk menghitung luas segitiga
+        function hitungLuasSegitiga() {
+            // Mengambil nilai input
+            var alas = document.getElementById("alas").value;
+            var tinggi = document.getElementById("tinggi").value;
+            
+            // Menghitung luas
+            var luas = (alas * tinggi) / 2;
+            
+            // Menampilkan hasil
+            document.getElementById("hasilSegitiga").innerHTML = "Luas segitiga: " + luas;
+        }
+    </script>
+</body>
+</html>
