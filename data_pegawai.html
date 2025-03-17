@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Data Pegawai</title>
+    <style>
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+        th, td {
+            border: 1px solid black;
+            padding: 8px;
+            text-align: left;
+        }
+        thead {
+            background-color: #ddd;
+        }
+        tfoot {
+            font-weight: bold;
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+    <h1>Data Pegawai</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Nama Pegawai</th>
+                <th>Umur</th>
+                <th>Jabatan</th>
+                <th>Status</th>
+                <th>Gaji Pokok</th>
+                <th>Tunjangan Jabatan</th>
+                <th>BPJS</th>
+                <th>Tunjangan Keluarga</th>
+            </tr>
+        </thead>
+        <tbody id="dataPegawai"></tbody>
+        <tfoot id="totalGaji"></tfoot>
+    </table>
+
+    <script>
+        // Data pegawai
+        const nama = "Dodi Prayodi";
+        const umur = 25;
+        const jabatan = "Manajer";
+        const status = "Menikah";
+        
+        // Hitung gaji pokok
+        let gajiPokok;
+        if (jabatan === "Manajer") {
+            gajiPokok = 15000000;
+        } else if (jabatan === "Asisten Manajer") {
+            gajiPokok = 10000000;
+        } else {
+            gajiPokok = 5000000;
+        }
+        
+        // Hitung komponen gaji
+        const tunjanganJabatan = gajiPokok * 0.15;
+        const bpjs = gajiPokok * 0.10;
+        const tunjanganKeluarga = status === "Menikah" ? gajiPokok * 0.20 : 0;
+        const totalGaji = gajiPokok + tunjanganJabatan + bpjs + tunjanganKeluarga;
+        
+        // Tampilkan data
+        document.getElementById("dataPegawai").innerHTML = `
+            <tr>
+                <td>${nama}</td>
+                <td>${umur} tahun</td>
+                <td>${jabatan}</td>
+                <td>${status}</td>
+                <td>Rp ${gajiPokok.toLocaleString()}</td>
+                <td>Rp ${tunjanganJabatan.toLocaleString()}</td>
+                <td>Rp ${bpjs.toLocaleString()}</td>
+                <td>Rp ${tunjanganKeluarga.toLocaleString()}</td>
+            </tr>
+        `;
+        
+        // Tampilkan total
+        document.getElementById("totalGaji").innerHTML = `
+            <tr>
+                <td colspan="4">Total Gaji</td>
+                <td colspan="4">Rp ${totalGaji.toLocaleString()}</td>
+            </tr>
+        `;
+    </script>
+</body>
+</html>
