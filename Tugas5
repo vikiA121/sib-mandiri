@@ -1,0 +1,95 @@
+// **Data Produk**
+let produktList = [
+  { id: 1, nama: "Laptop", harga: 12000000 },
+  { id: 2, nama: "Smartphone", harga: 5000000 },
+  // Penambahan data produk
+  { id: 3, nama: "Tablet", harga: 7000000 },
+  { id: 4, nama: "Headphone", harga: 1500000 },
+  { id: 5, nama: "Smartwatch", harga: 3000000 }
+];
+
+// **Menampilkan Produk dengan Destructuring**
+function tampilkanProduk() {
+  console.log("Daftar Produk:");
+  produktList.forEach(produk => {
+    // Menggunakan destructuring untuk mengekstrak properti
+    const { id, nama, harga } = produk;
+    console.log(`ID: ${id} | Nama: ${nama} | Harga: Rp${harga.toLocaleString()}`);
+  });
+  console.log("------------------------");
+}
+
+// **Menghapus Produk dengan Rest Parameter**
+function hapusProduk(id) {
+  const indeks = produktList.findIndex(produk => produk.id === id);
+  if (indeks !== -1) {
+    const [produkDihapus] = produktList.splice(indeks, 1);
+    console.log(`Produk ${produkDihapus.nama} telah dihapus`);
+  } else {
+    console.log(`Produk dengan ID ${id} tidak ditemukan`);
+  }
+}
+
+// **Menambahkan Produk dengan Spread Operator**
+function tambahProduk(id, nama, harga) {
+  // Cek apakah ID sudah ada
+  const produkAda = produktList.some(produk => produk.id === id);
+  
+  if (produkAda) {
+    console.log(`Produk dengan ID ${id} sudah ada`);
+    return;
+  }
+  
+  // Menambahkan produk baru menggunakan spread operator
+  produktList = [...produktList, { id, nama, harga }];
+  console.log(`Produk ${nama} telah ditambahkan`);
+}
+
+// Nama fungsi bebas (Event Handler)
+const eventHandler = {
+  tambahProdukEvent: function(...params) {
+    // Menggunakan rest parameter untuk menangkap argumen yang bervariasi
+    const [id, nama, harga] = params;
+    tambahProduk(id, nama, harga);
+  },
+  
+  hapusProdukEvent: function(id) {
+    hapusProduk(id);
+  },
+  
+  tampilkanProdukEvent: function() {
+    tampilkanProduk();
+  }
+};
+
+// Simulasi penggunaan event listener
+function simulasiEventListener() {
+  console.log("=== MANAJEMEN PRODUK TOKO ONLINE ===");
+  
+  // Menampilkan produk awal
+  console.log("\nProduk Awal:");
+  eventHandler.tampilkanProdukEvent();
+  
+  // Menambahkan produk baru
+  console.log("\nMenambahkan produk baru:");
+  eventHandler.tambahProdukEvent(6, "Speaker Bluetooth", 800000);
+  eventHandler.tampilkanProdukEvent();
+  
+  // Menghapus produk
+  console.log("\nMenghapus produk:");
+  eventHandler.hapusProdukEvent(2);
+  eventHandler.tampilkanProdukEvent();
+  
+  // Mencoba menambahkan produk dengan ID yang sudah ada
+  console.log("\nMencoba menambahkan produk dengan ID yang sudah ada:");
+  eventHandler.tambahProdukEvent(1, "Mouse Gaming", 500000);
+  eventHandler.tampilkanProdukEvent();
+  
+  // Mencoba menghapus produk yang tidak ada
+  console.log("\nMencoba menghapus produk yang tidak ada:");
+  eventHandler.hapusProdukEvent(10);
+  eventHandler.tampilkanProdukEvent();
+}
+
+// Jalankan simulasi
+simulasiEventListener();
